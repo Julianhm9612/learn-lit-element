@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>&lt;my-element> Demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="../my-element.js"></script>
+    <script type="module" src="../my-button.element.js"></script>
+    <style>
+      p {
+        border: solid 1px blue;
+        padding: 8px;
+      }
+      html { 
+        --themeColor: #ccc;
+      }
+      .stuff {
+        --themeColor: /* some other color */;
+      }
+      /* my-button.stuff {
+        --themeColor: /* some other color */;
+      } */
+      my-button {
+        font-family: Roboto;
+      }
+      /* html { --themeColor1: rgb(67, 156, 144); }
+      my-button {
+        --myBackground: var(--themeColor1);
+        --myColor: rgb(156, 67, 152);
+      } */
+      /* html {
+        --theme-primary: green;
+        --theme-secondary: aliceblue;
+        --theme-warning: red;
+        --theme-font-family: Roboto;
+      }
+      my-element { 
+        --my-element-text-color: var(--theme-primary); 
+        --my-element-background-color: var(--theme-secondary); 
+        --my-element-font-family: var(--theme-font-family);
+      } 
+      .warning {
+        --my-element-text-color: var(--theme-warning); 
+      } */
+    </style>
+  </head>
+  <body>
+    <my-element>
+      <p>This is child content</p>
+    </my-element>
+    <my-button class="blue">
+      <p slot="one">A child!</p>
+      <p slot="two">A child 2!</p>
+      <p>No default slot, so this one won't render either.</p>
+      <p slot="hi"> </p>
+    </my-button>
+    <!-- <my-button class="stuff"></my-button> -->
+    <!-- <my-element 
+      mystring="hello world"
+      mynumber="5"
+      mybool
+      myobj='{"stuff":"hi"}'
+      myarray='[1,2,3,4]'></my-element> -->
+
+      <my-element @my-event="${(e) => { console.log(e.detail.message) }}"></my-element>
+
+      <my-element onClick="(e) => console.log(e.target)"></my-element>
+
+      <script>
+        const myElement = document.querySelector('my-element');
+        myElement.addEventListener('my-event', (e) => {console.log(e)});
+      </script>
+  </body>
+</html>
